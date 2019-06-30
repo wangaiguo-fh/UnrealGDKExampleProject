@@ -3,8 +3,9 @@
 #include "GDKMobileCharacter.h"
 #include "GDKLogging.h"
 #include "UnrealNetwork.h"
-
+#include "Engine/World.h"
 #include "Components/GDKMovementComponent.h"
+#include "Components/InputComponent.h"
 
 AGDKMobileCharacter::AGDKMobileCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UGDKMovementComponent>(ACharacter::CharacterMovementComponentName))

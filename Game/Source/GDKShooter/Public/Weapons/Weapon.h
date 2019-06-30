@@ -6,6 +6,7 @@
 #include "Game/GDKMetaData.h"
 #include "GameFramework/Actor.h"
 #include "Materials/Material.h"
+#include "Camera/CameraShake.h"
 #include "Weapon.generated.h"
 
 USTRUCT()
@@ -59,7 +60,7 @@ public:
 	class AGDKShooterCharacter* GetOwningCharacter() const;
 	void SetOwningCharacter(class AGDKShooterCharacter* NewCharacter);
 
-	const AActor* GetWeilder() const { return GetAttachmentReplication().AttachParent; }
+	AActor* GetWeilder() const { return GetAttachmentReplication().AttachParent; }
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_MetaData)
 		FGDKMetaData MetaData;
@@ -76,7 +77,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapons")
 		bool IsFirstPerson();
 
-	void SetFirstPerson(bool bFirstPerson);
+	void SetFirstPerson(bool bFirstPerson_);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		float AimingFoV = 55;

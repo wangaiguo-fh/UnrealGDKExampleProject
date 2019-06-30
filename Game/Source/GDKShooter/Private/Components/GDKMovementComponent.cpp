@@ -4,20 +4,21 @@
 
 #include "Characters/Core/GDKCharacter.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/Controller.h"
 
 // Use the first custom movement flag slot in the character for sprinting.
 static const FSavedMove_Character::CompressedFlags FLAG_WantsToSprint = FSavedMove_GDKMovement::FLAG_Custom_0;
 
 UGDKMovementComponent::UGDKMovementComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
+	, MaxJogSpeed(450)
+	, bCanSprint(true)
+	, bShouldOrientToControlRotation(false)
 	, MaxSprintSpeed(850)
 	, SprintAcceleration(3400)
 	, SprintDirectionTolerance(0.1f)
 	, SprintCooldown(150)
-	, MaxJogSpeed(450)
 	, JogAcceleration(1800)
-	, bCanSprint(true)
-	, bShouldOrientToControlRotation(false)
 {
 	MaxWalkSpeed = 250;
 	MaxWalkSpeedCrouched = 125;

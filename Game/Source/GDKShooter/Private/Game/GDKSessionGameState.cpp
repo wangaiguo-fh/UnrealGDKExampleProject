@@ -8,6 +8,7 @@
 #include "SpatialWorkerConnection.h"
 #include "c_worker.h"
 #include "c_schema.h"
+#include "Engine/World.h"
 
 
 void AGDKSessionGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

@@ -6,6 +6,7 @@
 #include "Game/GDKMetaData.h"
 #include "Materials/MaterialInstance.h"
 #include "GameFramework/Character.h"
+#include "TimerManager.h"
 #include "GDKCharacter.generated.h"
 
 USTRUCT(BlueprintType)

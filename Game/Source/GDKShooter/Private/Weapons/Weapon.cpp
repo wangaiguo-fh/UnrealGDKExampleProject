@@ -112,9 +112,9 @@ void AWeapon::EnableShadows(bool bShadows)
 	Mesh->CastShadow = bShadows;
 }
 
-void AWeapon::SetFirstPerson(bool bFirstPerson)
+void AWeapon::SetFirstPerson(bool bFirstPerson_)
 {
-	this->bFirstPerson = bFirstPerson;
+	this->bFirstPerson = bFirstPerson_;
 }
 
 bool AWeapon::IsFirstPerson()
@@ -172,7 +172,6 @@ bool AWeapon::DoLineTrace(FInstantHitInfo& OutHitInfo)
 
 	FCollisionQueryParams TraceParams;
 	TraceParams.bTraceComplex = true;
-	TraceParams.bTraceAsyncScene = true;
 	TraceParams.bReturnPhysicalMaterial = false;
 	TraceParams.AddIgnoredActor(this);
 	TraceParams.AddIgnoredActor(Character);

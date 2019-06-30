@@ -4,6 +4,7 @@
 
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "SpatialNetDriver.h"
 #include "UnrealNetwork.h"
 #include "GDKLogging.h"
@@ -262,7 +263,7 @@ void AGDKCharacter::SetMetaData(FGDKMetaData NewMetaData)
 
 FString AGDKCharacter::GetPlayerName() const
 {
-	if (AGDKPlayerState* PS = Cast<AGDKPlayerState>(PlayerState))
+	if (AGDKPlayerState* PS = Cast<AGDKPlayerState>(GetPlayerState()))
 	{
 		return PS->GetPlayerName();
 	}

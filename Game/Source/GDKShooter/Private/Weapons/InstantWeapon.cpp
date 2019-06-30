@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GDKLogging.h"
 #include "UnrealNetwork.h"
+#include "GameFramework/DamageType.h"
 
 
 AInstantWeapon::AInstantWeapon()

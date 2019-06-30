@@ -3,6 +3,7 @@
 #include "GDKShooterCharacter.h"
 
 #include "Weapons/InstantWeapon.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Components/GDKMovementComponent.h"
 #include "Controllers/GDKPlayerController.h"
 #include "Engine/World.h"
@@ -215,9 +216,9 @@ void AGDKShooterCharacter::OnRep_EquippedWeapon()
 	}
 	if (EquippedWeapon)
 	{
-		FShotDelegate ShotCallback;
-		ShotCallback.BindUObject(this, &AGDKShooterCharacter::OnShot);
-		EquippedWeapon->AddShotListener(ShotCallback);
+		FShotDelegate ShotCallbackDel;
+		ShotCallbackDel.BindUObject(this, &AGDKShooterCharacter::OnShot);
+		EquippedWeapon->AddShotListener(ShotCallbackDel);
 	}
 	CachedEquippedWeapon = EquippedWeapon;
 	WeaponCallback.ExecuteIfBound(EquippedWeapon);
