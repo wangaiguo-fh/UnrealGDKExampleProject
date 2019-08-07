@@ -3,8 +3,9 @@
 #include "Components/GDKMovementComponent.h"
 
 #include "GameFramework/Character.h"
-#include "GDKLogging.h"
+#include "GameFramework/Controller.h"
 #include "UnrealNetwork.h"
+#include "GDKLogging.h"
 
 // Use the first custom movement flag slot in the character for sprinting.
 static const FSavedMove_Character::CompressedFlags FLAG_WantsToSprint = FSavedMove_GDKMovement::FLAG_Custom_0;
@@ -13,6 +14,10 @@ UGDKMovementComponent::UGDKMovementComponent(const FObjectInitializer& ObjectIni
 	: Super(ObjectInitializer)
 	, MaxJogSpeed(450)
 	, bCanSprint(true)
+	, bWantsToSprint(false)
+	, bWasSprintingLastFrame(false)
+	, bIsAiming(false)
+	, bIsBusy(false)
 	, bShouldOrientToControlRotation(false)
 	, MaxSprintSpeed(850)
 	, SprintAcceleration(3400)
@@ -31,8 +36,7 @@ void UGDKMovementComponent::TickComponent(float DeltaTime, enum ELevelTick TickT
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (IsSprinting() != bWasSprintingLastFrame)
-	{
+	if (IsSprinting() != bWasSprintingLastFrame) {
 		bWasSprintingLastFrame = IsSprinting();
 		SprintingUpdated.Broadcast(IsSprinting());
 	}
@@ -224,7 +228,10 @@ void UGDKMovementComponent::ServerSetAiming_Implementation(bool NewValue)
 void UGDKMovementComponent::SetAiming(bool NewValue)
 {
 	bIsAiming = NewValue;
-	ServerSetAiming(NewValue);
+	if (GetOwnerRole() != ROLE_SimulatedProxy)
+	{
+		ServerSetAiming(NewValue);
+	}
 	OnAimingUpdated.Broadcast(bIsAiming);
 }
 
